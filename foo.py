@@ -28,8 +28,15 @@ def get_shop_list_by_dishes(dishes, person_count):
                     a = int(i['quantity'])
                     b = i['measure']
                     quanity = {'quantity': a * person_count, 'measure': b}
-                    temp_dict = {ingredient: quanity}
-                    grocery_dict.update(temp_dict)
+                    if ingredient in grocery_dict:
+                        quanity_e = int(quanity['quantity'])
+                        quanity_c = int(i['quantity'])
+                        quanity = {'quantity': quanity_e+quanity_c * person_count, 'measure': b}
+                        temp_dict = {ingredient:quanity}
+                        grocery_dict.update(temp_dict)
+                    else:
+                        temp_dict = {ingredient:quanity}
+                        grocery_dict.update(temp_dict)
     return grocery_dict
 
 
